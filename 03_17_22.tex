@@ -1,0 +1,193 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{titlesec}
+
+\titleclass{\section}{top}
+\newcommand\sectionbreak{\clearpage}
+
+\begin{document}
+
+\section{}
+Using the forward Fourier equation: \[X[k] = \sum_{n=0}^{N-1} x[n] e^{-j\frac{2\pi}{N}kn}\] and the
+equation for $x[n] = \sin(\frac{\pi}{4}n)$ and $N = 8$, we solve for $k = 1, 3, 7$.
+
+Note that:
+
+\begin{align*}
+x[0] &= \sin(\frac{\pi}{4}0) = 0 \\
+x[1] &= \sin(\frac{\pi}{4}1) = \frac{\sqrt{2}}{2} \\
+x[2] &= \sin(\frac{\pi}{4}2) = 1 \\
+x[3] &= \sin(\frac{\pi}{4}3) = \frac{\sqrt{2}}{2} \\
+x[4] &= \sin(\frac{\pi}{4}4) = 0 \\
+x[5] &= \sin(\frac{\pi}{4}5) = -\frac{\sqrt{2}}{2} \\
+x[6] &= \sin(\frac{\pi}{4}6) = -1 \\
+x[7] &= \sin(\frac{\pi}{4}7) = -\frac{\sqrt{2}}{2} \\
+\end{align*}
+
+\subsection{$k = 1$}
+\begin{align*}
+    X[1] &= \sum_{n=0}^{7} \sin(\frac{\pi}{4}n) e^{-j\frac{2\pi}{8}n} \\
+    &= \sin(\frac{\pi}{4}0) e^{-j\frac{2\pi}{8}0} + \sin(\frac{\pi}{4}1) e^{-j\frac{2\pi}{8}1}
+    + \sin(\frac{\pi}{4}2) e^{-j\frac{2\pi}{8}2} + \sin(\frac{\pi}{4}3) e^{-j\frac{2\pi}{8}3} \\
+    &+ \sin(\frac{\pi}{4}4) e^{-j\frac{2\pi}{8}4} + \sin(\frac{\pi}{4}5) e^{-j\frac{2\pi}{8}5}
+    + \sin(\frac{\pi}{4}6) e^{-j\frac{2\pi}{8}6} + \sin(\frac{\pi}{4}7) e^{-j\frac{2\pi}{8}7} \\
+    &= 0 + \frac{\sqrt{2}}{2} e^{-j\frac{\pi}{4}} + e^{-j\frac{\pi}{2}} + \frac{\sqrt{2}}{2} e^{-j\frac{3\pi}{4}}
+    + 0 - \frac{\sqrt{2}}{2} e^{-j\frac{5\pi}{4}} - e^{-j\frac{3\pi}{2}} - \frac{\sqrt{2}}{2} e^{-j\frac{7\pi}{4}} \\
+    &\textrm{Using Euler's formula (note this is the negative variant): } e^{-jx} = \cos(x) - j\sin(x) \\
+    &= \frac{\sqrt{2}}{2} (\cos(\frac{\pi}{4}) - j\sin(\frac{\pi}{4})) + (\cos(\frac{\pi}{2}) - j\sin(\frac{\pi}{2}))
+    + \frac{\sqrt{2}}{2} (\cos(\frac{3\pi}{4}) - j\sin(\frac{3\pi}{4})) \\
+    &- \frac{\sqrt{2}}{2} (\cos(5\frac{\pi}{4}) - j\sin(\frac{5\pi}{4})) - (\cos(\frac{3\pi}{2}) - j\sin(\frac{3\pi}{2}))
+    - \frac{\sqrt{2}}{2} (\cos(\frac{7\pi}{4}) - j\sin(\frac{7\pi}{4})) \\
+    &\textrm{Evaluating all the cos and sin terms, we get:} \\
+    &= \frac{\sqrt{2}}{2} (\frac{\sqrt{2}}{2}- j\frac{\sqrt{2}}{2}) + (0 - j)
+    + \frac{\sqrt{2}}{2} (-\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2})
+    - \frac{\sqrt{2}}{2} (-\frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2}) - (0 + j)
+    - \frac{\sqrt{2}}{2} (\frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2}) \\
+    &= (\frac{1}{2}- j\frac{1}{2}) + (0 - j) + (-\frac{1}{2} - j\frac{1}{2})
+    + (\frac{1}{2} - j\frac{1}{2}) + (0 - j) + (-\frac{1}{2} - j\frac{1}{2}) \\
+    &= (1 - j) + (0 - 2j) + (-1 - j) = -4j \\
+    &\textrm{Which matches } X[1] \textrm{ in the plot.}
+\end{align*}
+
+\subsection{$k = 3$}
+Since $x[0]$ and $x[4]$ are $0$, we can skip the terms that depend on them.
+
+For $k = 3$, the exponential component of the $e$ term will be $-j\frac{2\pi}{8}3n$. So
+each term after the application of Euler's formula will be $\cos(\frac{3n\pi}{4}) - j\sin(\frac{3n\pi}{4})$.
+I'll start my computations from there:
+
+\begin{align*}
+    X[3] &= \frac{\sqrt{2}}{2} (\cos(\frac{3\pi}{4}) - j\sin(\frac{3\pi}{4}))
+    + (\cos(\frac{3\pi}{2}) - j\sin(\frac{3\pi}{2}))
+    + \frac{\sqrt{2}}{2} (\cos(\frac{9\pi}{4}) - j\sin(\frac{9\pi}{4})) \\
+    &- \frac{\sqrt{2}}{2} (\cos(15\frac{\pi}{4}) - j\sin(\frac{15\pi}{4}))
+    - (\cos(\frac{9\pi}{2}) - j\sin(\frac{9\pi}{2}))
+    - \frac{\sqrt{2}}{2} (\cos(\frac{21\pi}{4}) - j\sin(\frac{21\pi}{4})) \\
+    &= \frac{\sqrt{2}}{2} (-\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2})
+    + (0 + j)
+    + \frac{\sqrt{2}}{2} (\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2})
+    - \frac{\sqrt{2}}{2} (\frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2})
+    - (0 - j)
+    - \frac{\sqrt{2}}{2} (-\frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2}) \\
+    &= (-\frac{1}{2} - j\frac{1}{2})
+    + (0 + j)
+    + (\frac{1}{2} - j\frac{1}{2})
+    + (-\frac{1}{2} - j\frac{1}{2})
+    + (0 + j)
+    + (\frac{1}{2} - j\frac{1}{2}) \\
+    &= (-1 - j) + (0 + 2j) + (1 - j) = 0 \\
+    &\textrm{Which matches } X[3] \textrm{ in the plot.}
+\end{align*}
+
+\subsection{$k = 7$}
+For $k = 7$, the exponential component of the $e$ term will be $-j\frac{2\pi}{8}7n$. So
+each term after the application of Euler's formula will be $\cos(\frac{7n\pi}{4}) - j\sin(\frac{7n\pi}{4})$.
+Then:
+
+\begin{align*}
+    X[7] &= \frac{\sqrt{2}}{2} (\cos(\frac{7\pi}{4}) - j\sin(\frac{7\pi}{4}))
+    + (\cos(\frac{7\pi}{2}) - j\sin(\frac{7\pi}{2}))
+    + \frac{\sqrt{2}}{2} (\cos(\frac{21\pi}{4}) - j\sin(\frac{21\pi}{4})) \\
+    &- \frac{\sqrt{2}}{2} (\cos(35\frac{\pi}{4}) - j\sin(\frac{35\pi}{4}))
+    - (\cos(\frac{21\pi}{2}) - j\sin(\frac{21\pi}{2}))
+    - \frac{\sqrt{2}}{2} (\cos(\frac{49\pi}{4}) - j\sin(\frac{49\pi}{4})) \\
+    &= \frac{\sqrt{2}}{2} (\frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2})
+    + (0 + j)
+    + \frac{\sqrt{2}}{2} (-\frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2})
+    - \frac{\sqrt{2}}{2} (-\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2})
+    - (0 - j)
+    - \frac{\sqrt{2}}{2} (\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2}) \\
+    &= (\frac{1}{2} + j\frac{1}{2})
+    + (0 + j)
+    + (-\frac{1}{2} + j\frac{1}{2})
+    + (\frac{1}{2} + j\frac{1}{2})
+    + (0 + j)
+    + (-\frac{1}{2} + j\frac{1}{2}) \\
+    &= (1 + j) + (0 + 2j) + (-1 + j) = 4j \\
+    &\textrm{Which matches } X[7] \textrm{ in the plot.}
+\end{align*}
+
+\pagebreak
+\section{}
+Using the inverse Fourier equation: \[x[n] = \frac{1}{N}\sum_{k=0}^{N-1} X[k] e^{j\frac{2\pi}{N}kn}\]
+and the values of $X[k]$ obtained from the plot (and $N = 8$), we solve for $n = 5$.
+
+We note that $X[k]$ is 0, except when $k = 1$ or $k = 7$. Therefore, we only need to worry about those
+terms. Then:
+
+\begin{align*}
+    x[5] &= \frac{1}{8}\sum_{k=0}^{7} X[k] e^{j\frac{\pi}{4}k5} \\
+    &= \frac{1}{8}(X[1] e^{j\frac{5\pi}{4}} + X[7] e^{j\frac{35\pi}{4}}) \\
+    &= \frac{1}{8}(-4j e^{j\frac{5\pi}{4}} + 4j e^{j\frac{35\pi}{4}}) \\
+    &\textrm{Using Euler's formula (note this is the positive variant): } e^{jx} = \cos(x) + j\sin(x) \\
+    &= \frac{1}{8}(-4j (\cos(\frac{5\pi}{4}) + j\sin(\frac{5\pi}{4}))
+    + 4j (\cos(\frac{35\pi}{4}) + j\sin(\frac{35\pi}{4}))) \\
+    &= \frac{1}{8}(-4j (-\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2})
+    + 4j (-\frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2})) \\
+    &= \frac{1}{8}(-4j (-j\frac{\sqrt{2}}{2})
+    + 4j (j\frac{\sqrt{2}}{2})) \\
+    &= \frac{1}{8}(-4\frac{\sqrt{2}}{2}
+    - 4\frac{\sqrt{2}}{2}) = \frac{1}{8}(\frac{-8\sqrt{2}}{2}) = \frac{-\sqrt{2}}{2} \\
+    &\textrm{Which matches } x[5] \textrm{ in the plot.}
+\end{align*}
+
+\section{}
+We start from the equation we have from 2, only we don't input a value of $n$:
+
+\begin{align*}
+    x[n] &= \frac{1}{8}\sum_{k=0}^{7} X[k] e^{j\frac{\pi}{4}kn} \\
+    &= \frac{1}{8}(X[1] e^{j\frac{n\pi}{4}} + X[7] e^{j\frac{7n\pi}{4}}) \\
+    &= \frac{1}{8}(-4j e^{j\frac{n\pi}{4}} + 4j e^{j\frac{7n\pi}{4}}) \\
+    &\textrm{Euler's formula again...} \\
+    &= \frac{1}{8}((-4j (\cos(\frac{n\pi}{4}) + j \sin(\frac{n\pi}{4}))
+    + 4j (\cos(\frac{7n\pi}{4}) + j \sin(\frac{7n\pi}{4}))) \\
+    &= \frac{-j}{2} (\cos(\frac{n\pi}{4}) + j \sin(\frac{n\pi}{4}))
+    + \frac{j}{2} (\cos(\frac{7n\pi}{4}) + j \sin(\frac{7n\pi}{4})) \\
+    &= \frac{-j}{2} \cos(\frac{n\pi}{4}) + \frac{1}{2} \sin(\frac{n\pi}{4})
+    + \frac{j}{2} \cos(\frac{7n\pi}{4}) + \frac{-1}{2} \sin(\frac{7n\pi}{4}) \\
+    &= \frac{1}{2} \sin(\frac{n\pi}{4}) + \frac{-1}{2} \sin(\frac{7n\pi}{4}) \\
+    &\textrm{We will take a short detour to prove: } \frac{-1}{2} \sin(\frac{7n\pi}{4}) = \frac{1}{2} \sin(\frac{n\pi}{4}) \\
+    &\textrm{Cancelling the } \frac{1}{2} \textrm{ on both sides and using } \sin(-x) = -\sin(x) \textrm{, we get: } \\
+    &\sin(\frac{-7n\pi}{4}) = \sin(\frac{n\pi}{4}) \\
+    &\textrm{It's easy to see that } \frac{-7\pi}{4} \textrm{ is the same angle as } \frac{\pi}{4} \textrm{. It's just defined from the other direction!} \\
+    &\textrm{So they are the same.} \\
+    &\textrm{Back to solving } x[n] \textrm{! Substitute: } \frac{-1}{2} \sin(\frac{7n\pi}{4}) \textrm{ with } \frac{1}{2} \sin(\frac{n\pi}{4}) \\
+    x[n] &= \frac{1}{2} \sin(\frac{n\pi}{4}) + \frac{1}{2} \sin(\frac{n\pi}{4}) = \sin(\frac{n\pi}{4})  \\
+    &\textrm{Which is } x[n] \textrm{!}
+\end{align*}
+
+\section{}
+Starting with the forward Fourier equation and $x[n] = \sin(\frac{n\pi}{4})$ for $N = 8$, we have:
+
+\begin{align*}
+    X[k] &= \sum_{n=0}^{7} \sin(\frac{n\pi}{4}) e^{-j\frac{\pi}{4}kn} \\
+    &\textrm{Using the relation: } \sin(x) = \frac{e^{jx} - e^{-jx}}{2j} \\
+    &= \frac{1}{2j} \sum_{n=0}^{7} (e^{j\frac{n\pi}{4}} - e^{-j\frac{n\pi}{4}}) e^{-j\frac{n\pi}{4}k} \\
+    &\textrm{We see that: } e^{j\frac{-\pi}{4}} = e^{j\frac{7\pi}{4}} \\
+    &= \frac{1}{2j} \sum_{n=0}^{7} (e^{j\frac{n\pi}{4}} - e^{j\frac{7n\pi}{4}}) e^{-j\frac{n\pi}{4}k} \\
+    &= \frac{1}{2j} \sum_{n=0}^{7} (e^{j\frac{n\pi}{4}(1 - k)} - e^{j\frac{n\pi}{4}(7 - k)}) \\
+    &= \frac{1}{2j} \sum_{n=0}^{7} e^{j\frac{n\pi}{4}(1 - k)} - \frac{1}{2j} \sum_{n=0}^{7} e^{j\frac{n\pi}{4}(7 - k)} \\
+    &\textrm{Each sum is almost in the form of the kronecker delta function: } \delta_{ab} = \frac{1}{N} \sum_{c=1}^{N} e^{2\pi j \frac{c}{N} (a - b)} \\
+    &\textrm{Which is alternatively defined as: } \delta_{ab} = \begin{cases}
+        0 & \text{if } a \neq b \\
+        1 & \text{if } a = b
+    \end{cases} \\
+    &\textrm{We multiply and divide by } N \textrm{ for each term, adjust the exponent, and reduce the fraction coefficients:} \\
+    &= -4j \frac{1}{8} \sum_{n=0}^{7} e^{j\frac{2n\pi}{8}(1 - k)} + 4j \frac{1}{8} \sum_{n=0}^{7} e^{j\frac{2n\pi}{8}(7 - k)} \\
+    &\textrm{Let } n = n' - 1 \textrm{, then:} \\
+    &= -4j \frac{1}{8} \sum_{n'=1}^{8} e^{2\pi j\frac{n'- 1}{8}(1 - k)} + 4j\frac{1}{8} \sum_{n'=1}^{8} e^{2\pi j\frac{n' - 1}{8}(7 - k)} \\
+    &= -4j e^{2\pi j\frac{-1}{8}(1 - k)} \frac{1}{8} \sum_{n'=1}^{8} e^{2\pi j\frac{n'}{8}(1 - k)} + 4j e^{2\pi j\frac{-1}{8}(7 - k)} \frac{1}{8} \sum_{n'=1}^{8} e^{2\pi j\frac{n'}{8}(7 - k)} \\
+    &= -4j e^{2\pi j\frac{-1}{8}(1 - k)} \delta_{1k} + 4j e^{2\pi j\frac{-1}{8}(7 - k)} \delta_{7k} \\
+    &\textrm{Because of the delta functions, we see that this function only has values at } k = 1 \textrm{ and } k = 7 \textrm{.} \\
+    &\textrm{And when } k \textrm{ is either of those values, the exponential term reduces to } 1 \textrm{, since } e^{0} = 1 \textrm{. So: }\\
+    X[k] &= \begin{cases}
+        -4j & \text{if } k = 1 \\
+        4j & \text{if } k = 7 \\
+        0 & \text{otherwise}
+    \end{cases} \\
+    &\textrm{Which is } X[k] \textrm{!}
+\end{align*}
+
+\end{document}
