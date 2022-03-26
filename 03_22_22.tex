@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{gensymb}
+\usepackage{mathtools}
 \usepackage[margin=1in]{geometry}
 
 \usepackage{titlesec}
@@ -36,7 +37,7 @@ we can easily generate the coordinates for each voxel:
 
 \subsection*{2}
 At $t = 0.3$ ms, an RF pulse has been applied, but no gradients have been applied yet. Since all voxels are on
-resonance, they experience the same phase. A $90\degree$ RF pulse in the $+x$ will tip the magnetization vectors into
+resonance, they experience the same phase. A $90\degree$ RF pulse in the $+x'$ will tip the magnetization vectors into
 the $+y'$ direction. This means that each magnetization vector has a phase of $90\degree$.
 
 \subsection*{3}
@@ -44,7 +45,8 @@ At $t = 0.6$ ms, a gradient in $x$ direction at $29.359$ mT/m was already applie
 the equation: \[ \tilde{\phi} = 2\pi \bar{\gamma}G_{x}xt \]
 We can solve for the phase of the magnetization at each voxel. Note that since
 voxels (1, 4, 7), (2, 5, 8), and (3, 6, 9) respectively have the
-same $x$ position, they will have the same phase. 
+same $x$ position, they will have the same phase. Note that since the magnetization vector rotations are clockwise, we
+need to add a negative to the resulting angle to get the phase in the correct direction.  
 \subsubsection*{Voxels 1, 4, 7}
 \begin{align*}
     \tilde{\phi} &= 
@@ -52,8 +54,8 @@ same $x$ position, they will have the same phase.
     \left(29.359 * 10^{-3} \frac{T}{m} \right)
     \left(-30 * 10^{-3} m \right)
     \left(0.1 * 10^{-3} s \right) \\
-    &= -23.5750 \textrm{ radians} = -1350.75\degree \approx 89\degree \\
-    &\textrm{Adding the existing 90\degree phase, and the total phase at these voxels is 179\degree.}
+    &= -23.5750 \textrm{ radians} = -1350.75\degree \approx 89\degree \xrightarrow{\text{clockwise}} -89\degree \\
+    &\textrm{Adding the existing 90\degree phase, and the total phase at these voxels is 1\degree.}
 \end{align*}
 \subsubsection*{Voxels 2, 5, 8}
 \begin{align*}
@@ -72,8 +74,8 @@ same $x$ position, they will have the same phase.
     \left(29.359 * 10^{-3} \frac{T}{m} \right)
     \left(30 * 10^{-3} m \right)
     \left(0.1 * 10^{-3} s \right) \\
-    &= 23.5750 \textrm{ radians} = 1350.75\degree \approx 271\degree \\
-    &\textrm{Adding the existing 90\degree phase, and the total phase at these voxels is 361\degree or 1\degree.}
+    &= 23.5750 \textrm{ radians} = 1350.75\degree \approx 271\degree \xrightarrow{\text{clockwise}} -271\degree \\
+    &\textrm{Adding the existing 90\degree phase, and the total phase at these voxels is -181\degree or 179\degree.}
 \end{align*}
 
 \subsection*{4}
@@ -83,7 +85,8 @@ We can solve for the phase of the magnetization at each voxel. Note that since
 voxels (1, 2, 3), (4, 5, 6), and (7, 8, 9) respectively have the
 same $y$ position, they will have the same additional phase added. Then we need to add the
 phase from the $y$ gradient to the phase from the $x$ gradient to get the total
-phase of the magnetization at each voxel.
+phase of the magnetization at each voxel. Again, since the magnetization vector rotations are clockwise, we
+need to add a negative to the resulting angle to get the phase in the correct direction.  
 \subsubsection*{Voxels 1, 2, 3}
 \begin{align*}
     \tilde{\phi} &= 
@@ -91,7 +94,7 @@ phase of the magnetization at each voxel.
     \left(19.572 * 10^{-3} \frac{T}{m} \right)
     \left(30 * 10^{-3} m \right)
     \left(0.3 * 10^{-3} s \right) \\
-    &= 47.15 \textrm{ radians} = 2701.41\degree \approx 181\degree
+    &= 47.15 \textrm{ radians} = 2701.41\degree \approx 181\degree \xrightarrow{\text{clockwise}} -181\degree \textrm{ or } 179\degree
 \end{align*}
 \subsubsection*{Voxels 4, 5, 6}
 \begin{align*}
@@ -109,20 +112,20 @@ phase of the magnetization at each voxel.
     \left(19.572 * 10^{-3} \frac{T}{m} \right)
     \left(-30 * 10^{-3} m \right)
     \left(0.3 * 10^{-3} s \right) \\
-    &= -47.15 \textrm{ radians} = -2701.41\degree \approx 179\degree
+    &= -47.15 \textrm{ radians} = -2701.41\degree \approx 179\degree \xrightarrow{\text{clockwise}} -179\degree \textrm{ or } 181\degree
 \end{align*}
 \subsection*{}
 Now we add the phases from each gradient and the RF pulse to get the total phase at each voxel at $t = 1.2$ ms:
 \begin{align*}
-    &\textrm{Voxel 1: } 179\degree + 181\degree = 360\degree \\
-    &\textrm{Voxel 2: } 90\degree + 181\degree = 271\degree \\
-    &\textrm{Voxel 3: } 1\degree + 181\degree = 182\degree \\
-    &\textrm{Voxel 4: } 179\degree + 0\degree = 179\degree \\
+    &\textrm{Voxel 1: } 1\degree + 179\degree = 180\degree \\
+    &\textrm{Voxel 2: } 90\degree + 179\degree = 269\degree \\
+    &\textrm{Voxel 3: } 179\degree + 179\degree = 358\degree \\
+    &\textrm{Voxel 4: } 1\degree + 0\degree = 1\degree \\
     &\textrm{Voxel 5: } 90\degree + 0\degree = 90\degree \\
-    &\textrm{Voxel 6: } 1\degree + 0\degree = 1\degree \\
-    &\textrm{Voxel 7: } 179\degree + 179\degree = 358\degree \\
-    &\textrm{Voxel 8: } 90\degree + 179\degree = 269\degree \\
-    &\textrm{Voxel 9: } 1\degree + 179\degree = 180\degree
+    &\textrm{Voxel 6: } 179\degree + 0\degree = 179\degree \\
+    &\textrm{Voxel 7: } 1\degree + 181\degree = 182\degree \\
+    &\textrm{Voxel 8: } 90\degree + 181\degree = 271\degree \\
+    &\textrm{Voxel 9: } 179\degree + 181\degree = 360\degree \textrm{ or } 0\degree
 \end{align*}
 Their phases are all unique!
 
