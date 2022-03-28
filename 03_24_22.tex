@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{titlesec}
+
+\titleclass{\section}{top}
+\newcommand\sectionbreak{\clearpage}
+
+\begin{document}
+
+\subsection*{1}
+Given the equation:
+\[
+    F[k_{1}, k_{2}] = \sum_{n_{2} = 0}^{N_{2}-1} \sum_{n_{1} = 0}^{N_{1} - 1} f[n_{1}, n_{2}] \\
+    e^{-j 2\pi\left(\frac{n_{1} k_{1}}{N_{1}} + \frac{n_{2} k_{2}}{N_{2}}\right)}
+\]
+We will show that $F[k_{1} + pN_{1}, k_{2} + rN_{2}] = F[k_{1}, k_{2}]$, where $\{p,r\} \in \mathbb{Z}$. To do this, we will
+set $k_{1} = k_{1} + pN_{1}$ and $k_{2} = k_{2} + rN_{2}$ and simplify the right-hand side to
+obtain the original equation:
+
+\begin{align*}
+    F[k_{1} + pN_{1}, k_{2} + rN_{2}] &= \sum_{n_{2} = 0}^{N_{2}-1} \sum_{n_{1} = 0}^{N_{1} - 1} f[n_{1}, n_{2}]
+    e^{-j 2\pi\left(\frac{n_{1} (k_{1} + pN_{1})}{N_{1}} + \frac{n_{2} (k_{2} + rN_{2})}{N_{2}}\right)} \\
+    &= \sum_{n_{2} = 0}^{N_{2}-1} \sum_{n_{1} = 0}^{N_{1} - 1} f[n_{1}, n_{2}]
+    e^{-j 2\pi\left(\frac{n_{1} k_{1}}{N_{1}} + \frac{n_{2} k_{2}}{N_{2}} + \frac{n_{1} pN_{1}}{N_{1}} + \frac{n_{2} rN_{2}}{N_{2}} \right)} \\
+    &= \sum_{n_{2} = 0}^{N_{2}-1} \sum_{n_{1} = 0}^{N_{1} - 1} f[n_{1}, n_{2}]
+    e^{-j 2\pi\left(\frac{n_{1} k_{1}}{N_{1}} + \frac{n_{2} k_{2}}{N_{2}} \right)} e^{-j 2\pi \left(pn_{1} + rn_{2}\right)} \\
+    &\textrm{Since $\{p,r\} \in \mathbb{Z}$ (are integers) and $\{n_{1}, n_{2}\} \in \mathbb{Z}^{+}$ (are positive integers),} \\
+    &\textrm{then $\left(pn_{1} + rn_{2}\right) \in \mathbb{Z}$ (will also be some integer). } \\
+    &\textrm{We'll define $q = \left(pn_{1} + rn_{2}\right)$ to represent some integer. Then: } \\
+    &= \sum_{n_{2} = 0}^{N_{2}-1} \sum_{n_{1} = 0}^{N_{1} - 1} f[n_{1}, n_{2}]
+    e^{-j 2\pi\left(\frac{n_{1} k_{1}}{N_{1}} + \frac{n_{2} k_{2}}{N_{2}} \right)} e^{-j 2\pi q} \\
+    &\textrm{We can see that $e^{-j 2\pi q} = 1$, for all integers $q \in \mathbb{Z}$.} \\
+    &\textrm{This is because $e^{-j 2\pi} = 1$, and multiplying the phase term by an integer,} \\
+    &\textrm{$q$, keeps the phase in multiples of $2\pi$, which means it is always 1. So:} \\
+    &= \sum_{n_{2} = 0}^{N_{2}-1} \sum_{n_{1} = 0}^{N_{1} - 1} f[n_{1}, n_{2}]
+    e^{-j 2\pi\left(\frac{n_{1} k_{1}}{N_{1}} + \frac{n_{2} k_{2}}{N_{2}} \right)} = F[k_{1}, k_{2}] \\
+    &\textrm{Q.E.D.}
+\end{align*}
+
+\subsection*{2}
+Given the inverse Fourier Transform formula:
+\[
+    f[n_1, n_2] = \sum_{k_2 = 0}^{N_2 - 1} \sum_{k_1 = 0}^{N_1 - 1} F[k_1, k_2] e^{j 2\pi \left(\frac{n_1 k_1}{N_1} + \frac{n_2 k_2}{N_2}\right)}
+\]
+We will show that $f[n_1 + pN_1, n_2 + rN_2] = f[n_1, n_2]$, where $\{p,r\} \in \mathbb{Z}$. To show this, we will use
+the same approach as \textbf{1}:
+
+\begin{align*}
+    f[n_1 + pN_1, n_2 + rN_2] &= \sum_{k_2 = 0}^{N_2 - 1} \sum_{k_1 = 0}^{N_1 - 1} F[k_1, k_2]
+    e^{j 2\pi \left(\frac{(n_1 + pN_1) k_1}{N_1} + \frac{(n_2 + rN_2) k_2}{N_2}\right)} \\
+    &= \sum_{k_2 = 0}^{N_2 - 1} \sum_{k_1 = 0}^{N_1 - 1} F[k_1, k_2]
+    e^{j 2\pi \left(\frac{n_1 k_1}{N_1} + \frac{n_2 k_2}{N_2} + \frac{pN_1 k_1}{N_1} + \frac{rN_2 k_2}{N_2})\right)} \\
+    &= \sum_{k_2 = 0}^{N_2 - 1} \sum_{k_1 = 0}^{N_1 - 1} F[k_1, k_2]
+    e^{j 2\pi \left(\frac{n_1 k_1}{N_1} + \frac{n_2 k_2}{N_2}\right)} e^{j 2\pi(pk_1 + rk_2)} \\
+    &\textrm{Since $\{p,r\} \in \mathbb{Z}$ (are integers) and $\{k_{1}, k_{2}\} \in \mathbb{Z}^{+}$ (are positive integers),} \\
+    &\textrm{then $\left(pk_{1} + rk_{2}\right) \in \mathbb{Z}$ (will also be some integer). } \\
+    &\textrm{We'll define $s = \left(pk_{1} + rk_{2}\right)$ to represent some integer. Then: } \\
+    &= \sum_{k_2 = 0}^{N_2 - 1} \sum_{k_1 = 0}^{N_1 - 1} F[k_1, k_2]
+    e^{j 2\pi \left(\frac{n_1 k_1}{N_1} + \frac{n_2 k_2}{N_2}\right)} e^{j 2\pi s} \\
+    &\textrm{We can see that $e^{j 2\pi s} = 1$, for all integers $s \in \mathbb{Z}$.} \\
+    &\textrm{This is because $e^{j 2\pi} = 1$, and multiplying the phase term by an integer,} \\
+    &\textrm{$s$, keeps the phase in multiples of $2\pi$, which means it is always 1. So:} \\
+    &= \sum_{k_2 = 0}^{N_2 - 1} \sum_{k_1 = 0}^{N_1 - 1} F[k_1, k_2]
+    e^{j 2\pi \left(\frac{n_1 k_1}{N_1} + \frac{n_2 k_2}{N_2}\right)} = f[n_1, n_2] \\
+    &\textrm{Q.E.D.}
+\end{align*}
+
+\subsection*{3}
+First, we will consider the an arbitrary measurement $F[k_1, k_2]$. To achieve this, $k_1, k_2$ must satisfy the
+following relation:
+
+\begin{align*}
+    k_x = k_1 \Delta k_x \\
+    k_y = k_2 \Delta k_y
+\end{align*}
+
+We also have:
+
+\begin{align*}
+    \Delta k_x = \bar{\gamma}G_{x} \Delta t_x \\
+    \Delta k_y = \bar{\gamma}G_{y} \Delta t_y
+\end{align*}
+
+then combining these with the previous set of equations, we have:
+
+\begin{align*}
+    k_x = \bar k_1 {\gamma}G_{x} \Delta t_x \\
+    k_y = \bar k_2 {\gamma}G_{y} \Delta t_y
+\end{align*}
+
+Thus, $k_1, k_2$ scale the values of $k_x, k_y$ by acting as integer weights.
+
+For $F[k_1 = 3, k_2 = 5]$, a measurement must be made at $k_x = 3 \Delta k_x$ and $k_y = 5 \Delta k_y$. For
+$F[k_1 = 1, k_2 = 1]$, a measurment must by made at $k_x = \Delta k_x$ and $k_y = \Delta k_y$. If we examine the
+scanning parameter equation:
+
+\begin{align*}
+    k_x = \bar {\gamma}G_{x} t_x \\
+    k_y = \bar {\gamma}G_{y} t_y
+\end{align*}
+
+We can see that there are two free parameters to manipulate, the gradient strength ($G_x, G_y$) and the time the
+gradient is on ($t_x, t_y$). To achieve $3k_x$, this means either setting the gradient to $3G_x$ (3 times the strength
+relative to the gradient strength at $k_1 = 1$ or $k_x = \Delta x$) or setting the gradient time length to
+$3\Delta t_x$. Similarly, to achieve $5k_x$ to $5G_y$ (5 times the stength relative to the gradient strength at
+$k_2 = 1$ or $k_y = \Delta y$) or setting the gradient time length to $5 \Delta t_y$.
+
+However, we are not limited to changing each parameter individually, we can scale both parameters in proportion to
+each other as long as they are equal to $k_1$, $k_2$. For example, we can also achieve $3k_x$ by setting the
+gradient strength to $\sqrt{3}G_x$ and the gradient time to $\sqrt{3}\Delta t_x$.
+
+\end{document}
