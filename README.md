@@ -1,2 +1,2 @@
 # mri lecture solutions
-Solutions for questions in the MRI course taught by Cihat Eldeniz (Spring 2022).
+Solutions for some of the questions in the MRI course taught by Cihat Eldeniz (Spring 2022).
