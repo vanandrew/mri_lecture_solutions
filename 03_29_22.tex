@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{titlesec}
+
+\titleclass{\section}{top}
+\newcommand\sectionbreak{\clearpage}
+
+\begin{document}
+
+\subsection*{What is the resolution along $x$, i.e. what is $\Delta x$}
+The resolution along $x$ is given by the FOV divided by the Base Resolution:
+
+\begin{align*}
+    \Delta x = \frac{FOV}{Base\ Resolution} = \frac{250\ mm}{256\ pixels} = 0.977\ mm/pixel
+\end{align*}
+
+\subsection*{What is the readout bandwidth?}
+The readout bandwidth is given by the Sampling Bandwidth per Pixel multiplied by the Base Resolution:
+
+\begin{align*}
+    Readout\ Bandwidth &= (Sampling\ Bandwidth\ per\ Pixel) * (Base\ Resolution) \\
+    &= (320\ Hz/pixel) * (256\ pixels) = 81920\ Hz = 81.92\ kHz
+\end{align*}
+
+\subsection*{What is the sampling period, i.e. what is $\Delta t$?}
+The sampling period is given by the inverse of the Readout Bandwidth:
+
+\begin{align*}
+    Sampling\ Period = \frac{1}{Readout\ Bandwidth} = \frac{1}{81.92\ kHz} = 0.0122\ ms = 12.2\ \mu s
+\end{align*}
+
+\subsection*{What is the value of $N_1$ in the Fourier Transform equation?}
+$N_1$ is equal to the Base Resolution, so $N_1 = 256\ pixels$.
+
+\subsection*{Given that we will be collecting all $N_1$ measurements, $F[k_1]$, in a single readout, what should be the value of $G_x$?}
+First we solve for $\Delta k_x$:
+
+\begin{align*}
+    \Delta k_x = \frac{1}{FOV_x} = \frac{1}{250 * 10^{-3}\ m} = 4\ m^{-1}
+\end{align*}
+
+Now that we have $\Delta k_x$, we can solve for $G_x$:
+
+\begin{align*}
+    &\Delta k_x = \bar{\gamma} G_x \Delta t \rightarrow G_x = \frac{\Delta k_x}{\bar{\gamma}\Delta t} \\
+    &G_x = \frac{4\ m^{-1}}{(42.577 * 10^6\ Hz/T) (12.2 * 10^-6\ s)} = 0.0077\ T/m = 7.7\ mT/m
+\end{align*}
+
+\end{document}

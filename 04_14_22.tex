@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{titlesec}
+
+% \titleclass{\section}{top}
+% \newcommand\sectionbreak{\clearpage}
+
+\begin{document}
+
+\section{While keeping the bandwidth of the RF pulse the same, which of the following would you do to excite a thinner slice? Please explain.}
+The bandwidth of the slice is given by the lower and upper frequencies of the RF pulse. should
+\begin{align*}
+    \Delta f = f_{upper} - f_{lower}
+\end{align*}
+
+Each frequency is determined by the larmor precession equation $f = \bar{\gamma}B$, then:
+\begin{align*}
+    \Delta f = \bar{\gamma}B_{upper} - \bar{\gamma}B_{lower} = \bar{\gamma}\left(B_{upper} - B_{lower}\right)
+\end{align*}
+
+And the upper and lower $B$ field strengths are determined by $B_{z} = B_0 + G_z z$:
+\begin{align*}
+    \Delta f &= \bar{\gamma}\left(B_0 + G_z z_{upper} - B_0 - G_z z_{lower}\right) \\
+    &= \bar{\gamma}\left(G_z z_{upper} - G_z z_{lower}\right) \\
+    &= \bar{\gamma}G_z\left(z_{upper} - z_{lower}\right)
+\end{align*}
+
+From this expression, we can see that if we kept $\Delta f$ the same, but wanted a thinner slice
+(which implies $z_{upper} - z_{lower}$ decreases), we must increase, $G_z$, the strength of the slice
+gradient.
+
+\section{In a multi-slice acquisition, which one(s) of the following are changing?}
+\begin{itemize}
+    \item RF bandwidth
+    \item Gradient amplitude
+    \item Center frequency of the RF pulse
+\end{itemize}
+The Gradient Amplitude and RF Bandwidth should remain the same, since we aren't changing the thickness of the
+slice. However, the center frequency of the RF pulse would need to change for each slice acquired in the multi-slice
+acquisition.
+
+\section{If I would like to image the exact same slice at 1.5T and 3T, which one(s) of the following will be changing?}
+\begin{itemize}
+    \item RF bandwidth
+    \item Gradient amplitude
+    \item Center frequency of the RF pulse
+\end{itemize}
+From the 1st question we can see that the slice thickness is determined solely by the
+RF Bandwidth and the Gradient Amplitude, so changing the $B_0$ field shouldn't change these values.
+
+However, the center of frequency of the RF pulse will need to change since it is dependent on the $B_0$ field
+through the larmor precession equation: $f = \bar{\gamma}B$.
+
+\section{Remembering the following convention: \\
+x-axis = Right to left of patient \\
+y-axis = Posterior to anterior of patient \\
+z-axis = Head to foot of patient \\
+along which axis would you run the gradient field to excite:}
+\begin{itemize}
+    \item A coronal slice: The y-gradient
+    \item A sagittal slice: The x-gradient
+    \item A transversal slice: The z-gradient
+    \item An oblique slice that is parallel to the AC-PC line in the brain: Some combination of the y and z gradients
+\end{itemize}
+
+\section{While exciting a slice, which one do you run first?}
+\begin{itemize}
+    \item RF pulse
+    \item Gradient field
+    \item You run them together
+\end{itemize}
+You must run them together, the gradient field selects the slice to be excited, while the RF pulse
+actually excites the slice.
+
+\end{document}

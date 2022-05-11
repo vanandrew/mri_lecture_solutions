@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{titlesec}
+
+% \titleclass{\section}{top}
+% \newcommand\sectionbreak{\clearpage}
+
+\begin{document}
+
+\section{What is the slice thickness?}
+The slice thickness is 6 cm.
+
+\section{With the z-gradient turned on, please calculate the field strength values at A, B, C, D, E and F.}
+The static $B_0$ field has a strength of 3 T, while the z-gradient, $G_z$, is 20 mT/m. Then at each point:
+\begin{align*}
+    B(z) = B_0 + G_z z
+\end{align*}
+
+\begin{itemize}
+    \item $B(z = A) = 3 \textrm{T}\ + 0.02\ \textrm{T/m}\ *\ (-0.3\ \textrm{m}) = 2.994\ \textrm{T}$
+    \item $B(z = B) = 3 \textrm{T}\ + 0.02\ \textrm{T/m}\ *\ (0\ \textrm{m}) = 3\ \textrm{T}$
+    \item $B(z = C) = 3 \textrm{T}\ + 0.02\ \textrm{T/m}\ *\ (0.12\ \textrm{m}) = 3.0024\ \textrm{T}$
+    \item $B(z = D) = 3 \textrm{T}\ + 0.02\ \textrm{T/m}\ *\ (0.15\ \textrm{m}) = 3.003\ \textrm{T}$
+    \item $B(z = E) = 3 \textrm{T}\ + 0.02\ \textrm{T/m}\ *\ (0.18\ \textrm{m}) = 3.0036\ \textrm{T}$
+    \item $B(z = F) = 3 \textrm{T}\ + 0.02\ \textrm{T/m}\ *\ (0.3\ \textrm{m}) = 3.006\ \textrm{T}$
+\end{itemize}
+
+\section{What would be the corresponding precession frequencies in Hz?}
+The precession frequency is related to the field strength by the larmor precession equation:
+\begin{align*}
+    f = \bar{\gamma}B
+\end{align*}
+
+So for at each point, the frequencies are:
+
+\begin{itemize}
+    \item A: $f = 42.58\ \textrm{MHz/T} * 2.994\ \textrm{T} = 127.48452\ \textrm{MHz}$
+    \item B: $f = 42.58\ \textrm{MHz/T} * 3\ \textrm{T} = 127.74\ \textrm{MHz}$
+    \item C: $f = 42.58\ \textrm{MHz/T} * 3.0024\ \textrm{T} = 127.84219\ \textrm{MHz}$
+    \item D: $f = 42.58\ \textrm{MHz/T} * 3.003\ \textrm{T} = 127.86774\ \textrm{MHz}$
+    \item E: $f = 42.58\ \textrm{MHz/T} * 3.0036\ \textrm{T} = 127.89329\ \textrm{MHz}$
+    \item F: $f = 42.58\ \textrm{MHz/T} * 3.006\ \textrm{T} = 127.99548\ \textrm{MHz}$
+\end{itemize}
+
+\section{If we would like to excite this slice, what is the central frequency of precession for this slice and what are the lowest and highest frequencies of precession observed within this slice?}
+The central frequency of precession for this slice is 127.86774 MHz, with the lowest and highest frequencies being
+127.84219 MHz and 127.89329 MHz respectively.
+
+\section{We will need an RF pulse that is capable of exciting all of the spins precessing at this range of frequencies. Assuming that the plot on the right depicts the spectrum of such an RF pulse, what would be the values of $f_c$ and $\Delta f$ based on your answer to 4?}
+$f_c$ should be set to 127.86774 MHz and $\Delta f$ should have a value of 51.1 KHz.
+
+\section{Based on your answer to Question 5 on the first slide, what should be the value of A on the second slide?}
+Since $\Delta f$ is 51.1 KHz, and the bounds of the rect function are given by $-A/2$ and $A/2$ (So $A$ is just the width of the slice).
+So A should be 51.1 KHz.
+
+\section{What should be the value of $f_c$ for the original problem on Slide 1?}
+$f_c$ should be set to 127.86774 MHz.
+
+\end{document}
