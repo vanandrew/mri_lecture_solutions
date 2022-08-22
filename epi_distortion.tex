@@ -44,21 +44,20 @@ that $G_{pe}$ is 0 during this time, so that entire term goes to 0. This gives u
     &= 2\pi\gamma\left(t_{dwell}G_r(t)x + t_{dwell}\Delta B_0(x,y,z)\right)
 \end{align*}
 
-Now we consider $\Delta \phi_{pe}$. The time between readout lines is given by the dwell time multiplied by twice the number of
+Now we consider $\Delta \phi_{pe}$. The time between readout lines is given by the dwell time multiplied by the number of
 points in the readout axis of the FOV (which the paper defines as $N$), this is the time from the start of the current readout line
-to the end time of the next readout line. Adjacent points in $k_y$ are structured this way, due to the "zig-zag"-like trajectory
-of an EPI experiment. So the time difference between readout lines is $2Nt_{dwell}$. However, the paper also considers
+to the start time of the next readout line, which is $Nt_{dwell}$. However, the paper also considers
 the ramp time of the phase-encoding gradients, so this time is augmented by $\tau_{ramp}$. So the total time between points
-is $2Nt_{dwell} + 2\tau_{ramp}$. We also note that since the $k_x$ doesn't change between these two samples, it is
+is $Nt_{dwell} + 2\tau_{ramp}$. We also note that since the $k_x$ doesn't change between these two samples, it is
 easy to see that the readout Gradient will sum to 0 during this time, so we can ignore the $G_r$ term. So for some time,
-$t^{*}$ corresponding to the beginning of a readout line, and the time corresponding to the end of the next readout line,
-$t^{*} + 2Nt_{dwell} + 2\tau_{ramp}$, we have:
+$t^{*}$ corresponding to the beginning of a readout line, and the time corresponding to the start of the next readout line,
+$t^{*} + Nt_{dwell} + 2\tau_{ramp}$, we have:
 \begin{align*}
-    \Delta \phi_{pe} &= 2\pi\gamma\left(\int_{0}^{t^{*} + 2Nt_{dwell} + 2\tau_{ramp}}G_{pe}(t)y dt + \int_{0}^{t^{*} + 2Nt_{dwell} + 2\tau_{ramp}}\Delta B_0(x,y,z) dt\right) - \\
+    \Delta \phi_{pe} &= 2\pi\gamma\left(\int_{0}^{t^{*} + Nt_{dwell} + 2\tau_{ramp}}G_{pe}(t)y dt + \int_{0}^{t^{*} + Nt_{dwell} + 2\tau_{ramp}}\Delta B_0(x,y,z) dt\right) - \\
     &2\pi\gamma\left(\int_{0}^{t^{*}}G_{pe}(t)y dt + \int_{0}^{t^{*}}\Delta B_0(x,y,z) dt\right) \\
     &G_{pe} \textrm{ is only active for } \tau_{ramp} \textrm { for each readout line.} \\
-    &= 2\pi\gamma\left(2\tau_{ramp}G_{pe}(t)y + (t^{*} + 2Nt_{dwell} + 2\tau_{ramp})\Delta B_0(x,y,z)\right) - \\
+    &= 2\pi\gamma\left(2\tau_{ramp}G_{pe}(t)y + (t^{*} + Nt_{dwell} + 2\tau_{ramp})\Delta B_0(x,y,z)\right) - \\
     &2\pi\gamma\left(\tau_{ramp}G_{pe}(t)y dt + t^{*}\Delta B_0(x,y,z) dt\right) \\
-    &= 2\pi\gamma\left(\tau_{ramp}G_{pe}(t)y + (2Nt_{dwell} + 2\tau_{ramp})\Delta B_0(x,y,z)\right)
+    &= 2\pi\gamma\left(\tau_{ramp}G_{pe}(t)y + (Nt_{dwell} + 2\tau_{ramp})\Delta B_0(x,y,z)\right)
 \end{align*}
 \end{document}
